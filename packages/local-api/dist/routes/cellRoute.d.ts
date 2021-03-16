@@ -1,1 +1,1 @@
-export declare const createCellRouter: (fileName: string, dir: string) => void;
+export declare const createCellRouter: (fileName: string, dir: string) => any;

@@ -8,8 +8,10 @@ interface Cell{
     type: 'text' | 'code';
 }
 
-export const createCellRouter = (fileName: string, dir: string) => {
+export const createCellRouter = (fileName: string, dir: string) :any => {
     const router = express.Router();
+    router.use(express.json());
+
 
     const fullPath = path.join(dir, fileName)
 
