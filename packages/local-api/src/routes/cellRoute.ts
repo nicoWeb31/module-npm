@@ -2,49 +2,43 @@ import express from "express";
 import fs from "fs/promises";
 import path from "path";
 
-interface Cell{
+interface Cell {
     id: string;
     content: string;
-    type: 'text' | 'code';
+    type: "text" | "code";
 }
 
-export const createCellRouter = (fileName: string, dir: string) :any => {
+export const createCellsRouter = (filename: string, dir: string) => {
     const router = express.Router();
-    router.use(express.json());
 
+    const fullPath = path.join(dir, filename);
 
-    const fullPath = path.join(dir, fileName)
-
-    router.get("/cells", async (req, res, next) => {
+    router.get("/cells", async (req, res) => {
         try {
-            //read file
-            const result = await fs.readFile(fullPath, {encoding : 'utf8'});
+            // Read the file
+            const result = await fs.readFile(fullPath, { encoding: "utf-8" });
+
             res.send(JSON.parse(result));
-        } catch (error) {
-            if(error.code === 'ENOENT') {
-                //add code to create a file and add default cells 
-                await fs.writeFile(fullPath, '[]', 'utf8');
+        } catch (err) {
+            if (err.code === "ENOENT") {
+                await fs.writeFile(fullPath, "[]", "utf-8");
                 res.send([]);
-            }else {
-                throw error;
+            } else {
+                throw err;
             }
         }
-
-        //if read throws an error 
-
-        //inspect the error, see if it says that the file doesn't exist
-        //parse list of cells out of it
-        //send list of cells
     });
 
-    router.post("/cells", async (req, res, next) => {
-        //take the list of cells from request objec
-        //seialze them
-        const { cells }: {cells: Cell[]} = req.body;
-        await fs.writeFile(fullPath,JSON.stringify(cells), 'utf8');
+    router.post("/cells", async (req, res) => {
+        // Take the list of cells from the request obj
+        // serialize them
+        const { cells }: { cells: Cell[] } = req.body;
 
-        res.send({status: 'ok'})
+        // Write the cells into the file
+        await fs.writeFile(fullPath, JSON.stringify(cells), "utf-8");
 
-        //Write the cells in to the file
+        res.send({ status: "ok" });
     });
+
+    return router;
 };

@@ -13,6 +13,7 @@ var serve = function (port, filemame, dir, useProxy) {
     // console.log(`saving/fetching cell from  ${filemame}`);
     // console.log(`fine is in directory ${dir}`);
     var app = express_1.default();
+    app.use(cellRoute_1.createCellsRouter(filemame, dir));
     if (useProxy) {
         app.use(http_proxy_middleware_1.createProxyMiddleware({
             target: "http://localhost:3000",
@@ -23,10 +24,9 @@ var serve = function (port, filemame, dir, useProxy) {
     else {
         // production mode
         //absolute path to index.html
-        var packagePath = require.resolve("local-client/build/index");
+        var packagePath = require.resolve("local-client/build/index.html");
         app.use(express_1.default.static(path_1.default.dirname(packagePath)));
     }
-    app.use(cellRoute_1.createCellRouter(filemame, dir));
     return new Promise(function (resolve, reject) {
         app.listen(port, resolve).on("error", reject);
     });

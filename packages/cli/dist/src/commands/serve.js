@@ -51,7 +51,7 @@ exports.serverCommand = new commander_1.Command()
     .action(function (filename, options) {
     if (filename === void 0) { filename = "notebook.js"; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var dir, error_1;
+        var dir, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -62,14 +62,16 @@ exports.serverCommand = new commander_1.Command()
                 case 1:
                     //   console.log(path.basename(filename));
                     _a.sent();
-                    console.log("Opened " + filename + ". Navigate to https://localhost:" + options.port);
+                    console.log("Opened " + filename + ". Navigate to http://localhost:" + options.port);
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _a.sent();
-                    if (error_1.code === "EADDRINUSE") {
-                        return [2 /*return*/, console.error("Port is in Use.try running differnt port.")];
+                    err_1 = _a.sent();
+                    if (err_1.code === "EADDRINUSE") {
+                        console.error("Port is in use. Try running on a different port.");
                     }
-                    console.error("heres the problem", error_1.message);
+                    else {
+                        console.log("Heres the problem", err_1.message);
+                    }
                     process.exit(1);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
