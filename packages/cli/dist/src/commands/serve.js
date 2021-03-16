@@ -13,8 +13,13 @@ exports.serverCommand = new commander_1.Command()
     .option("-p, --port <number>", "port to run server on", "4005")
     .action(function (filename, options) {
     if (filename === void 0) { filename = "notebook.js"; }
-    //   console.log(path.join(process.cwd(), path.basename(filename)));
-    var dir = path_1.default.join(process.cwd(), path_1.default.dirname(filename));
-    //   console.log(path.basename(filename));
-    local_api_1.serve(parseInt(options.port), path_1.default.basename(filename), dir);
+    try {
+        //   console.log(path.join(process.cwd(), path.basename(filename)));
+        var dir = path_1.default.join(process.cwd(), path_1.default.dirname(filename));
+        //   console.log(path.basename(filename));
+        local_api_1.serve(parseInt(options.port), path_1.default.basename(filename), dir);
+    }
+    catch (error) {
+        console.error("heres the problem", error);
+    }
 });
