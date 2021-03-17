@@ -27,7 +27,7 @@ export const serve = (
     } else {
         // production mode
         //absolute path to index.html
-        const packagePath = require.resolve("local-client/build/index.html");
+        const packagePath = require.resolve("@jbook-nr/local-client/build/index.html");
         app.use(express.static(path.dirname(packagePath)));
     }
 

@@ -1,15 +1,23 @@
 {
-  "name": "cli",
+  "name": "jbook-nr",
   "version": "1.0.0",
   "description": "",
+  "bin": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "tsc --watch --preserveWatchOutput"
+    "start": "tsc --watch --preserveWatchOutput",
+    "prepublishOnly": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "commander": "^7.1.0",
-    "local-api": "^1.0.0"
+    "@jbook-nr/local-api": "^1.0.0"
   }
 }

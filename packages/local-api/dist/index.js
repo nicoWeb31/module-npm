@@ -24,7 +24,7 @@ var serve = function (port, filemame, dir, useProxy) {
     else {
         // production mode
         //absolute path to index.html
-        var packagePath = require.resolve("local-client/build/index.html");
+        var packagePath = require.resolve("@jbook-nr/local-client/build/index.html");
         app.use(express_1.default.static(path_1.default.dirname(packagePath)));
     }
     return new Promise(function (resolve, reject) {
