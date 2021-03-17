@@ -1,3 +1,0 @@
-[submodule "ts-test-esbuild"]
-	path = ts-test-esbuild
-	url = https://github.com/nicoWeb31/ts-test-esbuild.git

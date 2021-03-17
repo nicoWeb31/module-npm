@@ -22,11 +22,11 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "@jbook-nr/local-client": "^1.0.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^1.0.6",
-    "@jbook-nr/local-client": "^0.1.0"
+    "http-proxy-middleware": "^1.0.6"
   }
 }
